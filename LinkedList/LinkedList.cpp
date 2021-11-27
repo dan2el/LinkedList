@@ -27,10 +27,46 @@ void PushBack(tLinkedList* _pList, int _iData)
 		//	해당 노드의 pNext 를 생성시킨 노드의 주소로 채움
 
 		tNode* pCurruntFinalNode = _pList->pHeadNode;
-		while (true) {
-			if (pCurruntFinalNode->pNextNode == nullptr) {
-				break;
-			}
+		while (pCurruntFinalNode->pNextNode) {
+			pCurruntFinalNode = pCurruntFinalNode->pNextNode;
 		}
+		pCurruntFinalNode->pNextNode = pNode;
+	}
+	++_pList->iCount;
+}
+
+void PushFront(tLinkedList* _pList, int _iData)
+{
+	//	새로 생성시킨 노드의 다음을 기존의 헤드로 지정한다.
+	tNode* pNewNode = (tNode*)malloc(sizeof(tNode));
+	pNewNode->iData = _iData;
+	pNewNode->pNextNode = _pList->pHeadNode;
+	
+	//	리스트의 헤드노드 포인터를 갱신한다.
+	_pList->pHeadNode = pNewNode;
+
+	//	데이터 카운트 증가
+	++_pList->iCount;
+}
+//	재귀함수 사용 방법
+void Release(tNode* _pNode) {
+	if (_pNode == nullptr)
+		return;
+	Release(_pNode->pNextNode);
+	free(_pNode);
+}
+
+void ReleaseList(tLinkedList* _pList)
+{
+	//Release(_pList->pHeadNode); // 재귀함수 사용방법
+	
+	//반복문 사용방법
+	tNode* pDeleteNode = _pList->pHeadNode;
+
+	while (pDeleteNode) {
+		tNode* pNext = pDeleteNode->pNextNode;
+		free(pDeleteNode);
+		pDeleteNode = pNext;
 	}
 }
+

@@ -25,3 +25,6 @@ void InitList(tLinkedList* _pList);
 
 //	연결형 리스트 데이터 추가
 void PushBack(tLinkedList* _pList, int _iData);
+void PushFront(tLinkedList* _pList, int _iData);
+
+void ReleaseList(tLinkedList* _pList);
