@@ -19,3 +19,9 @@ typedef struct _tagList
 	int		iCount;		//	리스트에 들어간 데이터 개수를 저장.
 	//int	iMaxCount;	//	링크드리스트에는 최대값의 개념이 없음
 }tLinkedList;
+
+//	연결형 리스트 초기화
+void InitList(tLinkedList* _pList);
+
+//	연결형 리스트 데이터 추가
+void PushBack(tLinkedList* _pList, int _iData);
